@@ -40,7 +40,7 @@ ENV CAROOT=/mnt/ddev-global-cache/mkcert
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
       --mount=type=cache,target=/var/lib/apt,sharing=locked \
     apt-get update \
-    && apt-get install -y sudo
+    && apt-get install -y sudo mariadb-client
 
 # Allow the `$username` user passwordless sudo for `mkcert -install`
 RUN mkdir -p /etc/sudoers.d && \
