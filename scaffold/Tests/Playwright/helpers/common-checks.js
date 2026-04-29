@@ -2,9 +2,9 @@
 import { expect } from '@playwright/test';
 
 /**
- * Check for TYPO3 error messages on the page
- * @param {import('@playwright/test').Page} page
- */
+* Check for TYPO3 error messages on the page
+* @param {import('@playwright/test').Page} page
+*/
 export async function checkNoTypo3Errors(page) {
   const errorMessages = [
     'Whoops, looks like something went wrong.',
@@ -18,11 +18,11 @@ export async function checkNoTypo3Errors(page) {
 }
 
 /**
- * Fetch a URL and validate it returns valid JSON with data
- * @param {import('@playwright/test').APIRequestContext} request
- * @param {string} url
- * @returns {Promise<any>} The JSON response
- */
+* Fetch a URL and validate it returns valid JSON with data
+* @param {import('@playwright/test').APIRequestContext} request
+* @param {string} url
+* @returns {Promise<any>} The JSON response
+*/
 export async function fetchAndValidateJson(request, url) {
   const response = await request.get(url);
   expect(response).toBeOK();
@@ -41,11 +41,11 @@ export async function fetchAndValidateJson(request, url) {
 }
 
 /**
- * Fetch a URL and validate it returns valid XML
- * @param {import('@playwright/test').APIRequestContext} request
- * @param {string} url
- * @returns {Promise<string>} The XML text
- */
+* Fetch a URL and validate it returns valid XML
+* @param {import('@playwright/test').APIRequestContext} request
+* @param {string} url
+* @returns {Promise<string>} The XML text
+*/
 export async function fetchAndValidateXml(request, url) {
   const response = await request.get(url);
   expect(response).toBeOK();
