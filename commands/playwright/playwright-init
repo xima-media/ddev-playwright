@@ -4,34 +4,29 @@
 ## Usage: playwright-init
 ## Example: "ddev playwright-init"
 
+SCAFFOLD_BASE_URL="https://raw.githubusercontent.com/xima-media/ddev-playwright/main/scaffold"
+
 cd /var/www/html || exit 1
 
-# Scaffold project structure from .ddev/scaffold (mounted at /mnt/ddev_config/scaffold)
-SCAFFOLD_DIR="/mnt/ddev_config/scaffold"
-
-if [ ! -d "$SCAFFOLD_DIR" ]; then
-    echo "Error: scaffold directory not found at $SCAFFOLD_DIR"
-    exit 1
-fi
-
-# playwright.config.js at project root
-if [ ! -f "playwright.config.js" ]; then
-    cp "$SCAFFOLD_DIR/playwright.config.js" "playwright.config.js"
-    echo "Created playwright.config.js"
-else
-    echo "playwright.config.js already exists, skipping."
-fi
-
-# Tests/Playwright/helpers/
-mkdir -p "Tests/Playwright/helpers"
-for file in axe-helper.js common-checks.js; do
-    if [ ! -f "Tests/Playwright/helpers/$file" ]; then
-        cp "$SCAFFOLD_DIR/Tests/Playwright/helpers/$file" "Tests/Playwright/helpers/$file"
-        echo "Created Tests/Playwright/helpers/$file"
-    else
-        echo "Tests/Playwright/helpers/$file already exists, skipping."
+download_if_missing() {
+    local dest="$1"
+    local url="${SCAFFOLD_BASE_URL}/$1"
+    if [ -f "$dest" ]; then
+        echo "$dest already exists, skipping."
+        return
     fi
-done
+    mkdir -p "$(dirname "$dest")"
+    if wget -qO "$dest" "$url"; then
+        echo "Created $dest"
+    else
+        echo "Error: failed to download $url" >&2
+        exit 1
+    fi
+}
+
+download_if_missing "playwright.config.js"
+download_if_missing "Tests/Playwright/helpers/axe-helper.js"
+download_if_missing "Tests/Playwright/helpers/common-checks.js"
 
 # Conditionally copy an .env file if an example file exists
 [ -f .env.example ] && [ ! -f .env ] && cp -n .env.example .env

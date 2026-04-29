@@ -1,6 +1,5 @@
 name: playwright
 
-# list of files and directories listed that are copied into project .ddev directory
 project_files:
 - commands/playwright/playwright
 - commands/playwright/playwright-init
@@ -9,25 +8,6 @@ project_files:
 - playwright-build/xstartup
 - playwright-build/entrypoint.sh
 - docker-compose.playwright.yaml
-- scaffold/playwright.config.js
-- scaffold/Tests/Playwright/helpers/axe-helper.js
-- scaffold/Tests/Playwright/helpers/common-checks.js
 
 ddev_version_constraint: '>= v1.24.10'
 
-pre_install_actions:
-  - |
-    #ddev-nodisplay
-    #ddev-description:Removing old docker-compose.playwright_extras.yaml file (created by old versions of this add-on)
-    has_old_file=false
-    if [ -f docker-compose.playwright_extras.yaml ]; then
-      if grep -q '#ddev-generated' docker-compose.playwright_extras.yaml; then
-        rm -f docker-compose.playwright_extras.yaml
-      else
-        echo "'$DDEV_APPROOT/.ddev/docker-compose.playwright_extras.yaml' needs to be removed but has been modified by the user. Please check it and remove it"
-        has_old_file=true
-      fi
-    fi
-    if [ "${has_old_file}" = true ]; then
-      exit 2
-    fi
