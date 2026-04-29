@@ -1,3 +1,4 @@
+// #ddev-generated
 import AxeBuilder from '@axe-core/playwright';
 
 /**

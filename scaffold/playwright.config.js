@@ -1,9 +1,16 @@
+// #ddev-generated
 import { defineConfig, devices } from "@playwright/test";
 
 const baseURL = process.env.PLAYWRIGHT_BASE_URL || `https://${process.env.VIRTUAL_HOST.split(',')[0]}`;
-console.log(`Testing against: ${baseURL}`);
+
+// Set PLAYWRIGHT_SUITE=e2e or PLAYWRIGHT_SUITE=a11y to run only that suite.
+// Defaults to running all tests under Tests/Playwright/.
+const suite = process.env.PLAYWRIGHT_SUITE;
+const testDir = suite ? `Tests/Playwright/${suite}` : "Tests/Playwright";
+console.log(`Testing against: ${baseURL} | suite: ${suite ?? "all"} (${testDir})`);
 
 export default defineConfig({
+  testDir,
   timeout: 30 * 1000,
   forbidOnly: !!process.env.CI,
   fullyParallel: false,
