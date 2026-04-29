@@ -9,6 +9,9 @@ project_files:
 - playwright-build/xstartup
 - playwright-build/entrypoint.sh
 - docker-compose.playwright.yaml
+- scaffold/playwright.config.js
+- scaffold/Tests/Playwright/helpers/axe-helper.js
+- scaffold/Tests/Playwright/helpers/common-checks.js
 
 ddev_version_constraint: '>= v1.24.10'
 
