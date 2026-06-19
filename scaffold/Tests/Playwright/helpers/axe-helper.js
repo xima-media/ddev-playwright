@@ -2,15 +2,18 @@
 import AxeBuilder from '@axe-core/playwright';
 
 /**
-* Run axe accessibility scan on the current page
-* Tests against WCAG 2.1 Level A and AA (BITV 2.0 requirement)
-*
-* @param page - Playwright page object
-*/
-export async function checkA11y(page) {
+ * Run axe accessibility scan on the current page
+ * Tests against WCAG 2.1 Level A and AA (BITV 2.0 requirement)
+ *
+ * @param page - Playwright page object
+ * @param waitMs
+ * @param disableRules
+ */
+export async function checkA11y(page, { waitMs = 500, disableRules = [] ) {
+  if (waitMs) await page.waitForTimeout(waitMs);
+  
   const defaultTags = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'];
-
-  const disabledRules = ['label'];
+  const disabledRules = ['image-alt', ...disableRules];
 
   const builder = new AxeBuilder({ page })
     .withTags(defaultTags)
