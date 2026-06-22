@@ -18,7 +18,7 @@ export default defineConfig({
   workers: 1,
   outputDir: "Tests/Playwright/test-results",
   reporter: process.env.CI
-    ? [["list"], ["html", { open: "never" }], ["junit", { outputFile: "Tests/Playwright/test-results/junit.xml" }]]
+    ? [["list"], ["html", { open: "never", outputFolder: "Tests/Playwright/playwright-report" }], ["junit", { outputFile: "Tests/Playwright/test-results/junit.xml" }]]
     : [["list"], ["html", { open: "never", outputFolder: "Tests/Playwright/playwright-report" }]],
   use: {
     baseURL,
