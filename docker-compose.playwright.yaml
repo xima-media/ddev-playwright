@@ -6,12 +6,11 @@
 #
 services:
   playwright:
-    image: ${PLAYWRIGHT_DOCKER_IMAGE:-ghcr.io/xima-media/playwright:1.59.1}-${DDEV_SITENAME}-built
+    image: ${PLAYWRIGHT_DOCKER_IMAGE:-ghcr.io/xima-media/playwright-ddev:1.59.1}-${DDEV_SITENAME}-built
     build:
       context: playwright-build
       args:
-        PLAYWRIGHT_DOCKER_IMAGE: ${PLAYWRIGHT_DOCKER_IMAGE:-ghcr.io/xima-media/playwright:1.59.1}
-        KASMVNC_VERSION: ${KASMVNC_VERSION:-1.4.0}
+        PLAYWRIGHT_DOCKER_IMAGE: ${PLAYWRIGHT_DOCKER_IMAGE:-ghcr.io/xima-media/playwright-ddev:1.59.1}
         username: ${DDEV_USER}
         uid: ${DDEV_UID}
         gid: ${DDEV_GID}

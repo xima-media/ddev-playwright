@@ -13,6 +13,20 @@ The public API for this project is defined by the files `docker-compose.playwrig
 ---
 
 
+## [Unreleased]
+
+### Changed
+
+- Use the prebuilt [`ghcr.io/xima-media/playwright-ddev`](https://github.com/xima-media/typo3-docker/pkgs/container/playwright-ddev) image, which bundles KasmVNC and the ddev dependencies (`sudo`, `mariadb-client`, `mkcert`, `icewm`, `xauth`). This speeds up the add-on build and avoids downloading the KasmVNC `.deb` from GitHub at build time.
+
+### Removed
+
+- Removed the `KASMVNC_VERSION` build variable, as KasmVNC is now bundled in the base image.
+
+
+---
+
+
 ## [2.6.0](https://github.com/julienloizelet/ddev-playwright/releases/tag/v2.6.0) - 2026-02-16
 
 [_Compare with previous release_](https://github.com/julienloizelet/ddev-playwright/compare/v2.5.0...v2.6.0)
