@@ -5,7 +5,7 @@
 
 # ddev-playwright
 
-This fork uses the [xima-media/playwright](https://github.com/xima-media/typo3-docker/pkgs/container/playwright) docker image, which bundles the playwright dependencies.
+This fork uses the [xima-media/playwright-ddev](https://github.com/xima-media/typo3-docker/pkgs/container/playwright-ddev) docker image, which bundles the playwright dependencies together with KasmVNC. Using the prebuilt image speeds up the add-on build and avoids downloading the KasmVNC package from GitHub at build time.
 
 ## Installation
 
